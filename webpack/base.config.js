@@ -11,9 +11,9 @@ module.exports = {
 
   output: {
     // Output folder in which the files will be built
-    path: path.resolve(__dirname, '../out'),
+    path: path.resolve(__dirname, '../dist'),
     // All the JS files will be bundled in this one minified/obfuscated file
-    filename: './js/app.bundle.js'
+    filename: './js/eac-schedule.js'
   },
 
   module: {
