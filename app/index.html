@@ -62,8 +62,8 @@
         var CONTRIBUTION_AMOUNT = 0.1 * 10**18; // 1 ETHER
         var SMART_CONTRACT_ADDRESS = '0x89f489fD07bBeecF76e8aecf5283FFc9f8aD834C';
 
-        function successHandler(transaction) {
-          $('#txhash').html(transaction.transactionHash);
+        function successHandler(transactionHash) {
+          $('#txhash').html(transactionHash);
           $('#success-info').show();
         }
 
