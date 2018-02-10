@@ -1,7 +1,8 @@
-# Ethereum Alarm Clock DApp
+# Schedule transcation JS API
 
-A DApp that interacts with the Ethereum Alarm Clock.
+JS library to allows you to easily schedule Ethereum transcations to happen in the future using Ethereum Alarm Clock.
 
+<img src="https://i.imgur.com/BHgjSuW.png" />
 
 # Development guide
 
