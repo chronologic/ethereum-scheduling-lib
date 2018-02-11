@@ -49,7 +49,7 @@
       
       <button id="send-btn" class="btn btn-primary" disabled>Send contribution</button>
       <br><br>
-      <div id="success-info" class="alert alert-success" style="display: none">Your transaction has been successfully processed. This is transcation hash: <span id="txhash"></span></div>      
+      <div id="success-info" class="alert alert-success" style="display: none">Your transaction has been successfully processed.<br><br>This is transcation hash:<br><span id="txhash"></span></div>      
       <div id="enabled-info" class="alert alert-info" style="display: none">This is info displayed when MetaMask is present.</div>
       <div id="disabled-info" class="alert alert-danger" style="display: none">MetaMask not found. This message will be displayed.</div>
       <div id="locked-info" class="alert alert-warning" style="display: none">Please unlock your account in MetaMask.</div>
@@ -62,7 +62,9 @@
         var CONTRIBUTION_AMOUNT = 0.1 * 10**18; // 1 ETHER
         var SMART_CONTRACT_ADDRESS = '0x89f489fD07bBeecF76e8aecf5283FFc9f8aD834C';
 
-        function successHandler(transactionHash) {
+        function successHandler(result) {
+          var transactionHash = result.transactionHash;
+
           $('#txhash').html(transactionHash);
           $('#success-info').show();
         }
