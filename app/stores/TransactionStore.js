@@ -162,7 +162,7 @@ export class TransactionStore {
 
     return await this._eacScheduler.timestampSchedule(
       toAddress,
-      this._web3.web3.fromAscii(callData),
+      callData,
       callGas,
       callValue,
       windowSize,
