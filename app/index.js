@@ -48,7 +48,7 @@ async function setup() {
         throw 'Parameters values are needed for encoding ABI params.';
       }
 
-      return abi.rawEncode(parameterTypes, parameterValues);
+      return abi.rawEncode(parameterTypes, parameterValues).toString('hex');
     }
   }
 
@@ -202,8 +202,6 @@ async function setup() {
         this.requiredDeposit,
         false
       );
-
-      console.log('trans', transaction);
 
       this.successHandler(transaction);
     }
