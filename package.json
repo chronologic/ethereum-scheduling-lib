@@ -53,7 +53,7 @@
     "moment": "^2.20.1",
     "web3": "^0.20.0"
   },
-  "precommit": [
+  "pre-commit": [
     "test"
   ]
 }
