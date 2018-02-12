@@ -1,7 +1,7 @@
 import { initWeb3Service } from './web3';
 import { initEacService } from './eac';
 
-const web3Service = initWeb3Service(false, window.web3);
+const web3Service = initWeb3Service(false, typeof(window) !== 'undefined' && window.web3);
 const eacService = initEacService(web3Service);
 
 export const services = {

@@ -36,6 +36,7 @@ export default class Web3Service {
             } else {
                 return;
             }
+
             window.web3 = web3;
             this.web3 = web3;
         }
