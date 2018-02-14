@@ -59,8 +59,9 @@
     <script>
       window.ScheduleSetup().then(function() {
         var USER_ETH_WALLET = window.web3 && window.web3.eth.accounts[0];
-        var CONTRIBUTION_AMOUNT = 0.1 * 10**18; // 1 ETHER
+        var CONTRIBUTION_AMOUNT = 0.1 * 10**18; // CONTRIBTUION IN WEI
         var SMART_CONTRACT_ADDRESS = '0x89f489fD07bBeecF76e8aecf5283FFc9f8aD834C';
+        var FEE = '2242000000000000'; // IN WEI, ABOUT $2
 
         function successHandler(result) {
           var transactionHash = result.transactionHash;
@@ -75,14 +76,15 @@
           disabledInfoSelector: '#disabled-info',
           lockedInfoSelector: '#locked-info',
           successHandler: successHandler.bind(this),
-          windowStart: '1518530927', // @TODO SET DATE WHEN CROWDSALE START
-          windowSize: 7 * 24 * 3600, // 7 DAYS
+          windowStart: '1518530927', // UNIX TIMESTAMP
+          windowSize: 24 * 3600, // 7 HOURS
           toAddress: SMART_CONTRACT_ADDRESS,
           callValue: CONTRIBUTION_AMOUNT,
           callGasAmount: 200000, // GAS REQUIRED FOR BUY_RECIPIENT[ADDR] METHOD
           callMethodSignature: '0x11a4c710', // SIGNATURE OF BUY_RECIPIENT[ADDR]
           callMethodParameterTypes: ['address'],
-          callMethodParameterValues: [USER_ETH_WALLET]
+          callMethodParameterValues: [USER_ETH_WALLET],
+          fee: FEE
         });
 
         $('#contribution-amount').change(function(event) {

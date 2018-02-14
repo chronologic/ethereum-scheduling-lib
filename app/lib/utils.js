@@ -1,4 +1,5 @@
 import abi from 'ethereumjs-abi';
+import BigNumber from 'bignumber.js';
 
 import { services } from '../services';
 
@@ -11,6 +12,8 @@ if (typeof(window) !== 'undefined' && window.web3 && window.web3.currentProvider
 }
 
 export class Utils {
+    static ADDITIONAL_GAS_PRICE_HANDICAP = new BigNumber('5000000000'); // 5 gwei
+
     static castGweiToWei(gweiAmount) {
         if (!web3) {
             throw 'Casting Gwei to Wei failed. Web3 not present.';
@@ -42,5 +45,13 @@ export class Utils {
         }
 
         return abi.rawEncode(parameterTypes, parameterValues).toString('hex');
+    }
+
+    static getRecommendedGasPrice() {
+        return new Promise(resolve => {
+            web3.eth.getGasPrice((error, gasPrice) => {
+                resolve(gasPrice.add(this.ADDITIONAL_GAS_PRICE_HANDICAP));
+            });
+        });
     }
 }

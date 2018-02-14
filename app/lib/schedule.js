@@ -145,6 +145,8 @@ export class Schedule {
     }
 
     async sendTransaction() {
+        const initialGasPrice = await Utils.getRecommendedGasPrice();
+
         const transaction = await transactionStore.schedule(
             this.toAddress,
             this.callData,
@@ -156,7 +158,8 @@ export class Schedule {
             this.fee,
             this.payment,
             this.requiredDeposit,
-            false
+            false,
+            initialGasPrice
         );
 
         this.successHandler(transaction);
