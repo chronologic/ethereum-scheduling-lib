@@ -16,6 +16,11 @@ module.exports = {
     filename: './js/eac-schedule.js'
   },
 
+  node: {
+    fs: 'empty',
+    repl: 'empty'
+  },
+
   module: {
 
     rules: [

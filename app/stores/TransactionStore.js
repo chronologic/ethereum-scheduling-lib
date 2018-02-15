@@ -156,7 +156,7 @@ export class TransactionStore {
 
     const options = {
       from: this._web3.eth.defaultAccount,
-      gas: 3000000,
+      gas: 1500000,
       value: endowment
     };
 
