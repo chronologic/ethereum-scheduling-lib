@@ -3,8 +3,6 @@ import { stores } from '../stores/index';
 
 const { transactionStore } = stores;
 
-const EAC_GAS_AMOUNT = 180000;
-
 export class Schedule {
     enabledInfoSelector
     disabledInfoSelector
@@ -82,7 +80,7 @@ export class Schedule {
     }
 
     get finalCallGasAmount() {
-        return this.callGasAmount + EAC_GAS_AMOUNT;
+        return this.callGasAmount;
     }
 
     get callData() {
