@@ -31,9 +31,9 @@ export class TransactionStore {
 
   async setup() {
     try {
-      this._eacScheduler = await this._eac.scheduler();    
+      this._eacScheduler = await this._eac.scheduler();
     } catch (error) {
-      
+      throw error;
     }
 
     await this._web3.connect();
@@ -83,10 +83,16 @@ export class TransactionStore {
     };
   }
 
-  async getTransactionsFiltered({ startBlock, endBlock, limit = DEFAULT_LIMIT, offset = 0, resolved }) {
+  async getTransactionsFiltered({
+    startBlock,
+    endBlock,
+    limit = DEFAULT_LIMIT,
+    offset = 0,
+    resolved
+  }) {
     let transactions = await this.getTransactions({ startBlock, endBlock });
 
-    if (typeof(resolved) !== 'undefined') {
+    if (typeof resolved !== 'undefined') {
       return this.queryTransactions({
         transactions,
         offset,
@@ -109,7 +115,9 @@ export class TransactionStore {
     let status = TRANSACTION_STATUS.SCHEDULED;
 
     if (transaction.wasCalled) {
-      status = transaction.data.meta.wasSuccessful ? TRANSACTION_STATUS.EXECUTED : TRANSACTION_STATUS.FAILED;
+      status = transaction.data.meta.wasSuccessful
+        ? TRANSACTION_STATUS.EXECUTED
+        : TRANSACTION_STATUS.FAILED;
     }
 
     if (transaction.isCancelled) {
@@ -145,7 +153,20 @@ export class TransactionStore {
     return transaction.temporalUnit === TEMPORAL_UNIT.TIMESTAMP;
   }
 
-  async schedule(toAddress, callData = '', callGas, callValue, windowSize, windowStart, callGasPrice, fee, payment, requiredDeposit, waitForMined = true, initialGasPrice) {   
+  async schedule(
+    toAddress,
+    callData = '',
+    callGas,
+    callValue,
+    windowSize,
+    windowStart,
+    callGasPrice,
+    fee,
+    payment,
+    requiredDeposit,
+    waitForMined = true,
+    initialGasPrice
+  ) {
     const endowment = this._eacScheduler.calcEndowment(
       new BigNumber(callGas),
       new BigNumber(callValue),
@@ -163,7 +184,7 @@ export class TransactionStore {
     if (initialGasPrice) {
       options.gasPrice = initialGasPrice;
     }
-    
+
     this._eacScheduler.initSender(options);
 
     return await this._eacScheduler.timestampSchedule(

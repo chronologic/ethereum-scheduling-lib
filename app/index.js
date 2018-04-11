@@ -8,10 +8,10 @@ const { web3Service } = services;
 async function setup() {
   try {
     if (window && window.web3) {
-      await web3Service.init();      
+      await web3Service.init();
     }
   } catch (error) {
-
+    throw error;
   }
 
   window['Schedule'] = Schedule;

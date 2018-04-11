@@ -1,47 +1,40 @@
-const merge = require('webpack-merge')
-const baseConfig = require('./base.config.js')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const merge = require('webpack-merge');
+const baseConfig = require('./base.config.js');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = merge(baseConfig, {
-
-  module: {
-    rules: [
-      // Loader for the stylesheets
-      {
-        test: /\.(css|sass|scss)$/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                minimize: true
-              }
-            },
-            {
-              loader: 'resolve-url-loader'
-            },
-            {
-              loader: 'sass-loader'
-            }
-          ],
-          fallback: 'style-loader'
-        })
-      }
-    ]
-  },
-
-  plugins: [
-    // Uglifies and minifies the JS
-    new UglifyJSPlugin({
-      uglifyOptions: {
-        compress: {
-          warnings: false
-        },
-        output: {
-          comments: false
+  mode: 'production',
+  optimization: {
+    minimizer: [
+      new UglifyJSPlugin({
+        uglifyOptions: {
+          output: {
+            comments: false
+          },
+          compress: {
+            unsafe_comps: true,
+            properties: true,
+            keep_fargs: false,
+            pure_getters: true,
+            collapse_vars: true,
+            unsafe: true,
+            warnings: false,
+            sequences: true,
+            dead_code: true,
+            drop_debugger: true,
+            comparisons: true,
+            conditionals: true,
+            evaluate: true,
+            booleans: true,
+            loops: true,
+            unused: true,
+            hoist_funs: true,
+            if_return: true,
+            join_vars: true,
+            drop_console: true
+          }
         }
-      }
-    })
-  ]
+      })
+    ]
+  }
 });
